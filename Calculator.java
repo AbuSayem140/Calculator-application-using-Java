@@ -19,7 +19,7 @@ import java.awt.Font;
 public class Calculator extends JFrame implements ActionListener{
     
     private Container c;
-    private JButton btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPlus,btnMin,btnEqual,btnMultiplication,btnDiv,btnDot,btnDel,btnPow,btnRoot,btnPM;
+    private JButton btn0,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btnPlus,btnMin,btnEqual,btnMultiplication,btnDiv,btnDot,btnDel,btnPow,btnRoot;
     private JButton btnSin,btnCos,btnTan,btnD;
     private JPanel disPanel;
     private JMenuBar menuBar;
@@ -277,7 +277,7 @@ public class Calculator extends JFrame implements ActionListener{
         lightMode.addActionListener(this);
 
 
-         btn0.addActionListener(this);
+        btn0.addActionListener(this);
         btn1.addActionListener(this);
         btn2.addActionListener(this);
         btn3.addActionListener(this);
@@ -451,7 +451,113 @@ public class Calculator extends JFrame implements ActionListener{
             }
         }
    
+     // EQUAL BUTTON & ANS
+
+     else if (source == btnEqual) {
+      if(flag==1){
+                
+                num2 =  Double.parseDouble(input.getText());
+                ans = num +num2;
+                input.setText(""); 
+                input.setText(roundNum(ans));
+                op.setText(roundNum(num)+" + "+roundNum(num2));
+                flag=0;
+        }
+    else if (flag==2) {
+                num2 =  Double.parseDouble(input.getText());
+                ans = num - num2;
+                input.setText(""); 
+                input.setText(roundNum(ans));
+                op.setText(roundNum(num)+" - "+roundNum(num2));
+                flag=0;
+        }
+     else if (flag==3) {
+               
+                num2 =  Double.parseDouble(input.getText());
+                ans = num * num2;
+                input.setText(""); 
+                input.setText(roundNum(ans));
+                op.setText(roundNum(num)+" x "+roundNum(num2));
+                flag=0;
+        }
+     else if (flag==4) {
+               
+                num2 =  Double.parseDouble(input.getText());
+                ans = num / num2;
+                input.setText(""); 
+                input.setText(roundNum(ans));
+                op.setText(roundNum(num)+"/"+roundNum(num2));
+                flag=0;
+        }
+      
+     else if (flag==5) {
+                num = Double.parseDouble(input.getText());
+                numRad = Math.toRadians(num);
+                ans =Math.sin( numRad);
+                op.setText("Sin("+roundNum(num)+")");
+                input.setText(roundNum(ans)); // Callling RoundUp for round 3 degit 
+                flag=0;  
+                
+        }
+     else if (flag==6) {
+                num = Double.parseDouble(input.getText());
+                numRad = Math.toRadians(num);
+                ans =Math.cos( numRad);
+                op.setText("cos("+roundNum(num)+")");
+                input.setText(roundNum(ans));// Callling RoundUp for round 3 degit 
+                flag=0;  
+        }
+     else if (flag==7) {
+         
+                num = Double.parseDouble(input.getText());
+                numRad = Math.toRadians(num);
+                ans =Math.tan( numRad);
+                op.setText("Tan("+roundNum(num)+")");
+                input.setText(roundNum(ans)); // Callling RoundUp for round 3 degit 
+                flag=0;
+        }
+       
+     else if (flag==8) {
+               num2 = Double.parseDouble(input.getText());
+               ans = Math.pow(num,num2 );
+               input.setText("");
+               op.setText(roundNum(num)+"^"+roundNum(num2));
+               input.setText(roundNum(ans));
+               flag=0;
+        }
      
+     else if (flag==9) {
+               
+               num = Double.parseDouble(input.getText());
+               ans = Math.sqrt( num);
+               input.setText("");
+               input.setText(roundNum(ans));
+               op.setText("\u221A"+roundNum(num));
+               flag=0;
+        }
+     else if (flag==0) { 
+               input.setText("Error");
+               flag=0;
+        }
+    }
+   
+  
+  // delete button
+  else if (source == btnDel) {
+      input.setText("");   
+      op.setText("");   
+    }
+  else if (source == btnD) {
+        int length = input.getText().length();
+        int number = length - 1;
+        if (length > 0) {
+            StringBuilder back = new StringBuilder(input.getText());
+            back.deleteCharAt(number);
+            input.setText(back.toString());
+        }
+        if (input.getText().endsWith("")) {
+        }
+    }
     
 
 
